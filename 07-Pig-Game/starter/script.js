@@ -75,3 +75,21 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+
+// It is better to create a function that contains all the starting conditions and then call it at the beginning and keep calling it when the new game button is reset
+
+btnNew.addEventListener('click', function () {
+  document.querySelector(`.player--0`).classList.remove('player--winner');
+  document.querySelector(`.player--1`).classList.remove('player--winner');
+  scores[0] = 0;
+  scores[1] = 0;
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  diceEl.classList.remove('hidden');
+  document.querySelector(`.player--0`).classList.add('player--active');
+  document.getElementById(`current--0`).textContent = currentScore;
+  document.getElementById(`current--1`).textContent = currentScore;
+});
