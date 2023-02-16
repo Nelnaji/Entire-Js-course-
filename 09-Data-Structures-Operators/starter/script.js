@@ -142,3 +142,18 @@ console.log(`${team1 < team2 ? 'team1' : 'team2'} is likely to win`);
 team2 > team1 && console.log('team2 will most likely win');
 
 // console.log(` ${2 + 1 === 4 ? 'yes' : 'no'}`);
+
+// coding challenge #2 //
+
+// 1
+for (const player of game.scored) console.log(player);
+
+// 2
+let avg = 0;
+for (const odd of Object.values(game.odds)) {
+  avg += odd;
+
+  console.log(avg / Object.keys(game.odds).length);
+}
+
+// 3
