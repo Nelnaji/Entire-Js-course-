@@ -47,6 +47,104 @@
 // coding challenge #1 //
 //                     //
 
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+// 1
+
+// my solution
+
+// const players1 = game.players[0];
+// const players2 = game.players[1];
+
+// teach solution
+
+// const [players1, players2] = game.players;
+
+// // 2
+
+// const [gk, ...fieldPlayers] = players1;
+// const [gk2, ...fieldPlayers2] = players2;
+
+// // 3
+// const allPlayers = [...players1, ...players2];
+// // 4
+// const playersFinal = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// console.log(playersFinal);
+
+// // 5
+// // my solution
+
+// // const { team1, x: draw, team2 } = game.odds;
+
+// // teach solution
+
+// const {
+//   odds: { team1, x: draw, team2 },
+// } = game;
+// // 6
+
+// const printGoals = (...players) => {
+//   let goals = players.length;
+//   console.log(...players, goals);
+// };
+
+// printGoals('Davies', 'Muller', 'Lewandowski', 'fifteen');
+
+// printGoals(...game.scored);
+
+// // 7
+// team1 > team2
+//   ? console.log('team1 will most likely win')
+//   : console.log('team2 will most likely win');
+
+// // another good solution
+// console.log(`${team1 < team2 ? 'team1' : 'team2'} is likely to win`);
+
+// // if team1>team2 true then console.log
+// team2 > team1 && console.log('team2 will most likely win');
+
+// console.log(` ${2 + 1 === 4 ? 'yes' : 'no'}`);
+
+// coding challenge #2 //
+
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -87,63 +185,6 @@ const game = {
     team2: 6.5,
   },
 };
-// 1
-
-// my solution
-
-// const players1 = game.players[0];
-// const players2 = game.players[1];
-
-// teach solution
-
-const [players1, players2] = game.players;
-
-// 2
-
-const [gk, ...fieldPlayers] = players1;
-const [gk2, ...fieldPlayers2] = players2;
-
-// 3
-const allPlayers = [...players1, ...players2];
-// 4
-const playersFinal = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
-console.log(playersFinal);
-
-// 5
-// my solution
-
-// const { team1, x: draw, team2 } = game.odds;
-
-// teach solution
-
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
-// 6
-
-const printGoals = (...players) => {
-  let goals = players.length;
-  console.log(...players, goals);
-};
-
-printGoals('Davies', 'Muller', 'Lewandowski', 'fifteen');
-
-printGoals(...game.scored);
-
-// 7
-team1 > team2
-  ? console.log('team1 will most likely win')
-  : console.log('team2 will most likely win');
-
-// another good solution
-console.log(`${team1 < team2 ? 'team1' : 'team2'} is likely to win`);
-
-// if team1>team2 true then console.log
-team2 > team1 && console.log('team2 will most likely win');
-
-// console.log(` ${2 + 1 === 4 ? 'yes' : 'no'}`);
-
-// coding challenge #2 //
 
 // 1
 for (const player of game.scored) console.log(player);
@@ -152,8 +193,14 @@ for (const player of game.scored) console.log(player);
 let avg = 0;
 for (const odd of Object.values(game.odds)) {
   avg += odd;
-
-  console.log(avg / Object.keys(game.odds).length);
 }
+console.log(avg / Object.keys(game.odds).length);
 
 // 3
+
+const entries = Object.entries(game.odds);
+console.log(entries);
+
+for (const [key, value] of entries) {
+  console.log(`Odd of ${key === 'x' ? 'draw' : 'victory'} `);
+}
