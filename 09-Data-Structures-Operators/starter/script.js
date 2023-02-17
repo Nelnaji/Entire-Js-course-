@@ -238,7 +238,7 @@
 //   [92, '🔶 Yellow card'],
 // ]);
 
-// // 1
+// 1
 // const eventsArr = [];
 
 // for (const [minute, event] of gameEvents) {
@@ -249,6 +249,11 @@
 
 // console.log(events);
 
+// teacher solution
+
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
 // // 2
 
 // gameEvents.delete(64);
@@ -256,12 +261,27 @@
 
 // // 3
 
-// const [...minutesArr] = gameEvents;
-// console.log(minutesArr[9][0] / gameEvents.size);
-// 4
+// // const [...minutesArr] = gameEvents;
+// // console.log(
+// //   `an event happened, on average every ${
+// //     minutesArr[9][0] / gameEvents.size
+// //   } minutes`
+// // );
+
+// // teacher solution
+// const time = [...gameEvents.keys()].pop();
+// console.log(
+//   `an event happened, on average every ${time / gameEvents.size} minutes`
+// );
+
+// // 4
 
 // for (const [minute, event] of gameEvents) {
-//   eventsArr.push(event);
+//   console.log(
+//     minute < 45
+//       ? `[first half] ${minute}: ${event}`
+//       : `[second half] ${minute}: ${event}`
+//   );
 // }
 
 // working with strings
@@ -274,38 +294,65 @@
 // What is slice ?
 // does slice accept negative values ?
 
-const airline = 'ryanair airline brussels';
-const plane = 'A320';
+// const airline = 'ryanair airline brussels';
+// const plane = 'A320';
 
-console.log(plane[0]);
-console.log(airline.slice(0, airline.lastIndexOf(' ')));
+// console.log(plane[0]);
+// console.log(airline.slice(0, airline.lastIndexOf(' ')));
 
-console.log(airline.slice(2));
+// console.log(airline.slice(2));
 
-// basically js transform the string into an object
+// // basically js transform the string into an object
 
-console.log(new String('nawfal'));
-// nawfal is an object
+// console.log(new String('nawfal'));
+// // nawfal is an object
 
-// what is .toLowerCase()
-// what is .toUpperCase()
-// what is .trim() is there a way to trim the start and the end ? does it only trim white spaces ?
-// what is .replace() and .replaceAll()
+// // what is .toLowerCase()
+// // what is .toUpperCase()
+// // what is .trim() is there a way to trim the start and the end ? does it only trim white spaces ?
+// // what is .replace() and .replaceAll()
 
-const text = "J'ai mangé une pomme rouge, sur la route du chaperon rouge";
+// const text = "J'ai mangé une pomme rouge, sur la route du chaperon rouge";
 
-console.log(text.replace(/rouge/g, 'jaune'));
+// console.log(text.replace(/rouge/g, 'jaune'));
 
-// what is .includes()
-// what is .startsWith();
-// what is .endsWith()
+// // what is .includes()
+// // what is .startsWith();
+// // what is .endsWith()
 
-// what is split() what does it return ?
-console.log('elkhaznagi Nawfal'.split(' '));
+// // what is split() what does it return ?
+// console.log('elkhaznagi Nawfal'.split(' '));
 
-const [nom, prenom] = 'elkhaznagi Nawfal'.split(' ');
+// const [nom, prenom] = 'elkhaznagi Nawfal'.split(' ');
 
-// what is join()
+// // what is join()
 
-const newName = ['M.', nom.toUpperCase(), prenom].join(' ');
-console.log(newName);
+// const newName = ['M.', nom.toUpperCase(), prenom].join(' ');
+// console.log(newName);
+
+// coding challenge #4
+
+const body = document.body;
+const textarea = document.createElement('textarea');
+const btn = document.createElement('button');
+btn.innerText = 'submit';
+body.append(textarea);
+
+body.append(btn);
+
+btn.addEventListener('click', () => {
+  const text = textarea.value;
+
+  const splitText = text.toLowerCase().split('\n');
+  let greenStar = 0;
+  for (const underscore of splitText) {
+    greenStar += 1;
+    let newText = underscore.trim().split('_');
+    let bTextBody = newText[1].slice(1);
+    let bTextLetter = newText[1].slice(0, 1).toUpperCase();
+    let aText = newText[0];
+    const camelCase = `${aText}${bTextLetter}${bTextBody} `;
+
+    console.log(` ${camelCase.padEnd(20, ' ')} ${'✅'.repeat(greenStar)}`);
+  }
+});
