@@ -224,42 +224,88 @@
 
 // coding challenge #3
 
-const gameEvents = new Map([
-  [17, '⚽ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽ GOAL'],
-  [80, '⚽ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// const gameEvents = new Map([
+//   [17, '⚽ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽ GOAL'],
+//   [80, '⚽ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
 
-// 1
-const eventsArr = [];
+// // 1
+// const eventsArr = [];
 
-for (const [minute, event] of gameEvents) {
-  eventsArr.push(event);
-}
+// for (const [minute, event] of gameEvents) {
+//   eventsArr.push(event);
+// }
 
-const events = new Set(eventsArr);
+// const events = new Set(eventsArr);
 
-console.log(events);
+// console.log(events);
 
-// 2
+// // 2
 
-gameEvents.delete(64);
-console.log(gameEvents);
+// gameEvents.delete(64);
+// console.log(gameEvents);
 
-// 3
+// // 3
 
-const [...minutesArr] = gameEvents;
-console.log(minutesArr[9][0] / gameEvents.size);
+// const [...minutesArr] = gameEvents;
+// console.log(minutesArr[9][0] / gameEvents.size);
 // 4
 
 // for (const [minute, event] of gameEvents) {
 //   eventsArr.push(event);
 // }
+
+// working with strings
+
+// what is indexOf and lastIndexOf
+// can you determine the length of a string ? how ?
+
+// can you search by index a string ?
+// can you indexOf words and letters ?
+// What is slice ?
+// does slice accept negative values ?
+
+const airline = 'ryanair airline brussels';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(airline.slice(0, airline.lastIndexOf(' ')));
+
+console.log(airline.slice(2));
+
+// basically js transform the string into an object
+
+console.log(new String('nawfal'));
+// nawfal is an object
+
+// what is .toLowerCase()
+// what is .toUpperCase()
+// what is .trim() is there a way to trim the start and the end ? does it only trim white spaces ?
+// what is .replace() and .replaceAll()
+
+const text = "J'ai mangé une pomme rouge, sur la route du chaperon rouge";
+
+console.log(text.replace(/rouge/g, 'jaune'));
+
+// what is .includes()
+// what is .startsWith();
+// what is .endsWith()
+
+// what is split() what does it return ?
+console.log('elkhaznagi Nawfal'.split(' '));
+
+const [nom, prenom] = 'elkhaznagi Nawfal'.split(' ');
+
+// what is join()
+
+const newName = ['M.', nom.toUpperCase(), prenom].join(' ');
+console.log(newName);
