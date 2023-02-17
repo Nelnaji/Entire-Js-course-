@@ -145,62 +145,121 @@
 
 // coding challenge #2 //
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+
+// // 1
+// for (const player of game.scored) console.log(player);
+
+// // 2
+// let avg = 0;
+// for (const odd of Object.values(game.odds)) avg += odd;
+
+// //   /= signifie egale divisé par
+// avg /= Object.keys(game.odds).length;
+
+// console.log(avg);
+
+// // 3
+
+// const entries = Object.entries(game.odds);
+
+// for (const [key, value] of entries) {
+//   console.log(
+//     `Odd of ${key === 'x' ? 'draw:' : 'victory'} ${
+//       key !== 'x' ? game[key] : ''
+//     } ${value}`
+//   );
+// }
+
+// // 4 bonus
+// // code found on the internet
+
+// const scorersObj = {};
+
+// for (const playerName of game.scored) {
+//   scorersObj[playerName] = (scorersObj[playerName] || 0) + 1;
+// }
+
+// console.log(scorersObj);
+
+// coding challenge #3
+
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
 
 // 1
-for (const player of game.scored) console.log(player);
+const eventsArr = [];
+
+for (const [minute, event] of gameEvents) {
+  eventsArr.push(event);
+}
+
+const events = new Set(eventsArr);
+
+console.log(events);
 
 // 2
-let avg = 0;
-for (const odd of Object.values(game.odds)) {
-  avg += odd;
-}
-console.log(avg / Object.keys(game.odds).length);
+
+gameEvents.delete(64);
+console.log(gameEvents);
 
 // 3
 
-const entries = Object.entries(game.odds);
-console.log(entries);
+const [...minutesArr] = gameEvents;
+console.log(minutesArr[9][0] / gameEvents.size);
+// 4
 
-for (const [key, value] of entries) {
-  console.log(`Odd of ${key === 'x' ? 'draw' : 'victory'} `);
-}
+// for (const [minute, event] of gameEvents) {
+//   eventsArr.push(event);
+// }
