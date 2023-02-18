@@ -371,11 +371,16 @@ btn.addEventListener('click', () => {
   const lines = text.toLowerCase().split('\n');
   let greenStar = 0;
   console.log(lines);
+
+  // teacher uses [i, line] of line.entries and i is used instead of greenStar
   for (const line of lines) {
     greenStar += 1;
 
     const [first, second] = line.trim().split('_');
-    const final = `${first}${second.replace(second[0], second[0].toUpperCase)}`;
+    const final = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
 
     console.log(` ${final.padEnd(20, ' ')} ${'✅'.repeat(greenStar)}`);
   }
