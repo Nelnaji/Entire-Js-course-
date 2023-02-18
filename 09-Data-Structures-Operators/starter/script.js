@@ -332,6 +332,32 @@
 
 // coding challenge #4
 
+// const body = document.body;
+// const textarea = document.createElement('textarea');
+// const btn = document.createElement('button');
+// btn.innerText = 'submit';
+// body.append(textarea);
+
+// body.append(btn);
+
+// btn.addEventListener('click', () => {
+//   const text = textarea.value;
+
+//   const splitText = text.toLowerCase().split('\n');
+//   let greenStar = 0;
+//   for (const underscore of splitText) {
+//     greenStar += 1;
+//     let newText = underscore.trim().split('_');
+//     let bTextBody = newText[1].slice(1);
+//     let bTextLetter = newText[1].slice(0, 1).toUpperCase();
+//     let aText = newText[0];
+//     const camelCase = `${aText}${bTextLetter}${bTextBody} `;
+
+//     console.log(` ${camelCase.padEnd(20, ' ')} ${'✅'.repeat(greenStar)}`);
+//   }
+// });
+
+// solution inspired by teacher's
 const body = document.body;
 const textarea = document.createElement('textarea');
 const btn = document.createElement('button');
@@ -339,20 +365,18 @@ btn.innerText = 'submit';
 body.append(textarea);
 
 body.append(btn);
-
 btn.addEventListener('click', () => {
   const text = textarea.value;
 
-  const splitText = text.toLowerCase().split('\n');
+  const lines = text.toLowerCase().split('\n');
   let greenStar = 0;
-  for (const underscore of splitText) {
+  console.log(lines);
+  for (const line of lines) {
     greenStar += 1;
-    let newText = underscore.trim().split('_');
-    let bTextBody = newText[1].slice(1);
-    let bTextLetter = newText[1].slice(0, 1).toUpperCase();
-    let aText = newText[0];
-    const camelCase = `${aText}${bTextLetter}${bTextBody} `;
 
-    console.log(` ${camelCase.padEnd(20, ' ')} ${'✅'.repeat(greenStar)}`);
+    const [first, second] = line.trim().split('_');
+    const final = `${first}${second.replace(second[0], second[0].toUpperCase)}`;
+
+    console.log(` ${final.padEnd(20, ' ')} ${'✅'.repeat(greenStar)}`);
   }
 });
