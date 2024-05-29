@@ -146,68 +146,106 @@
 
 // #5 the call and apply method
 
-const lufthansa = {
-    airline: 'Lufthansa',
-    iataCode: 'LH',
-    bookings:[],
-    // book: function(){},
-    book(flightNum, name) {
-console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+// const lufthansa = {
+//     airline: 'Lufthansa',
+//     iataCode: 'LH',
+//     bookings:[],
+//     // book: function(){},
+//     book(flightNum, name) {
+// console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
 
-this.bookings.push({flight:`${this.iataCode}${flightNum}`, name})
-    },
-};
-
-
-lufthansa.book(756, 'Elkhaznagi Nawfal')
-lufthansa.book(235, 'Malcom X')
+// this.bookings.push({flight:`${this.iataCode}${flightNum}`, name})
+//     },
+// };
 
 
+// lufthansa.book(756, 'Elkhaznagi Nawfal')
+// lufthansa.book(235, 'Malcom X')
 
-const eurowings = {
-    airline: 'Eurowings',
-    iataCode: 'EW',
-    bookings:[],
-    // book: function(){},
+
+
+// const eurowings = {
+//     airline: 'Eurowings',
+//     iataCode: 'EW',
+//     bookings:[],
+//     // book: function(){},
     
+// };
+
+// // the book function is actually a copy of the lufthansa.book method, but it is outside of the object. so the this keyword needs to be redefined via call bind or apply
+// const book = lufthansa.book
+
+// // book(278, "Ali Ghali") doesn't work because this is undefined
+
+// // on peux appliqué une methode a la function book, car toute function est un type d'objet.
+// // call method
+// book.call(eurowings, 698, 'Ali Ghali')
+
+// console.log(eurowings)
+
+
+// book.call(lufthansa,888, "ahlan Sahlan")
+// console.log(lufthansa)
+
+// // apply method
+
+// //                difference between call and apply ? call accepts arguments, while
+// //                                           apply  accepts an array of argument
+
+// const flightData = [586, 'Georgio Armani']
+// book.apply(lufthansa, flightData)
+
+// book.apply(eurowings, [874, 'Name plate'])
+
+// // the apply method is no longer used because we can use the call method with a ... call is also much faster
+// book.call(eurowings, ...flightData)
+
+// // #5 Bind method
+
+// const bookEW = book.bind(eurowings);
+// const bookLH = book.bind(lufthansa);
+// bookEW(784, "Steven Williams")
+
+// // we have already set the flightNum as 23 so we only need to add a name
+// // this pattern is called partial application
+// const bookEW232 = book.bind(eurowings, 232);
+
+// bookEW232('Martha Johns');
+// bookEW232('William Johston')
+
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function(){
+//     console.log(this);
+//     this.planes++;
+//     console.log(this.planes);
+// }
+
+// const planeBuying = lufthansa.buyPlane
+// const buyBtn = document.querySelector('.buy');
+// buyBtn.addEventListener('click', planeBuying.bind(lufthansa))
+
+// // Partial application
+// // rate/100 instantly transform the rate to a percentage
+// const addTax = (rate,value) => value + value * rate/100 
+
+// console.log(addTax(10, 200))
+// // partial application
+// // bind(thisArg, Arg1, Arg2 , ..., ArgN)
+// // ont utilise null par convention
+// const addVAT = addTax.bind(null, 23)
+
+// console.log(addVAT(300))
+
+
+const addTax = (rate,value) => value + value * rate;
+
+const addVAT = value => addTax(0.23, value)
+
+const addTaxRate = function (rate) {
+    return function (value) {
+        return  value + value * rate;
+    };
 };
 
-// the book function is actually a copy of the lufthansa.book method, but it is outside of the object. so the this keyword needs to be redefined via call bind or apply
-const book = lufthansa.book
-
-// book(278, "Ali Ghali") doesn't work because this is undefined
-
-// on peux appliqué une methode a la function book, car toute function est un type d'objet.
-// call method
-book.call(eurowings, 698, 'Ali Ghali')
-
-console.log(eurowings)
-
-
-book.call(lufthansa,888, "ahlan Sahlan")
-console.log(lufthansa)
-
-// apply method
-
-//                difference between call and apply ? call accepts arguments, while
-//                                           apply  accepts an array of argument
-
-const flightData = [586, 'Georgio Armani']
-book.apply(lufthansa, flightData)
-
-book.apply(eurowings, [874, 'Name plate'])
-
-// the apply method is no longer used because we can use the call method with a ... call is also much faster
-book.call(eurowings, ...flightData)
-
-// #5 Bind method
-
-const bookEW = book.bind(eurowings);
-const bookLH = book.bind(lufthansa);
-bookEW(784, "Steven Williams")
-
-// we have already set the flightNum as 23 so we only need to add a name
-const bookEW232 = book.bind(eurowings, 232);
-
-bookEW232('Martha Johns');
-bookEW232('William Johston')
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(235))
