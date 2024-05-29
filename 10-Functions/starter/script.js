@@ -75,41 +75,139 @@
 
 // #3 High order functions
 
-const oneWord = function(str){
-// retire les espaces, et transform toutes les lettres en miniscule
-    return str.replace(/ /g, '').toLowerCase();
-}
+// const oneWord = function(str){
+// // retire les espaces, et transform toutes les lettres en miniscule
+//     return str.replace(/ /g, '').toLowerCase();
+// }
 
-const upperFirstWord = function(str){
+// const upperFirstWord = function(str){
 
-    // we first split the string based on space the first word is placed in the first place in the array, and the others are put in the rest
-    const [first,...other]= str.split(' '); 
-// we join the whol array, by adding a space between each array value, et the first position in the array is put in upperCase
-    return [first.toUpperCase(), ...other].join(' ');
+//     // we first split the string based on space the first word is placed in the first place in the array, and the others are put in the rest
+//     const [first,...other]= str.split(' '); 
+// // we join the whol array, by adding a space between each array value, et the first position in the array is put in upperCase
+//     return [first.toUpperCase(), ...other].join(' ');
 
-}
+// }
 
-// console.log(upperFirstWord("Jelm aparest test es"))
+// // console.log(upperFirstWord("Jelm aparest test es"))
 
-// Higher-order function
+// // Higher-order function
 
-const transformer = function(str, fn) {
-console.log(`Original string : ${str}`)
-console.log(`Transformed string : ${fn(str)}`)
+// const transformer = function(str, fn) {
+// console.log(`Original string : ${str}`)
+// console.log(`Transformed string : ${fn(str)}`)
 
-// functions have their own property
-console.log(`Transformed by: ${fn.name}`)
-// return fn(str);
-}
+// // functions have their own property
+// console.log(`Transformed by: ${fn.name}`)
+// // return fn(str);
+// }
 
-transformer('JavaScript is the best!', upperFirstWord)
-transformer('JavaScript is the best!', oneWord)
+// transformer('JavaScript is the best!', upperFirstWord)
+// transformer('JavaScript is the best!', oneWord)
 
 
 
-// JS uses callbacks all the time 
-const highFive = function(){
-    console.log('👋')
+// // JS uses callbacks all the time 
+// const highFive = function(){
+//     console.log('👋')
+// };
+// // forEach is the higher-order function and highFive is the callback function
+// ['Nawfal', 'Moncef', 'Sanae'].forEach(highFive);
+
+
+// #4 function that return a function
+
+// const greet = function(greeting) {
+
+//     return function(name){
+//         console.log(`${greeting} ${name}`);
+//     }
+// }
+// // storing the function in a variable
+// const salam = greet('Salam');
+
+// salam('Nawfal')
+// salam('Mohamed')
+
+
+// rewriting using arrow functions
+
+// const greet = greeting => {
+//         return  name => console.log(`${greeting} ${name}`) 
+// }
+
+// // teachers way
+
+// const greetArr = greeting => name =>  console.log(`${greeting} ${name}`) 
+
+// greet('Hello')('AbdelKader')
+
+// greetArr('Salam')('Ali')
+
+// #5 the call and apply method
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings:[],
+    // book: function(){},
+    book(flightNum, name) {
+console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+
+this.bookings.push({flight:`${this.iataCode}${flightNum}`, name})
+    },
 };
-// forEach is the higher-order function and highFive is the callback function
-['Nawfal', 'Moncef', 'Sanae'].forEach(highFive);
+
+
+lufthansa.book(756, 'Elkhaznagi Nawfal')
+lufthansa.book(235, 'Malcom X')
+
+
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings:[],
+    // book: function(){},
+    
+};
+
+// the book function is actually a copy of the lufthansa.book method, but it is outside of the object. so the this keyword needs to be redefined via call bind or apply
+const book = lufthansa.book
+
+// book(278, "Ali Ghali") doesn't work because this is undefined
+
+// on peux appliqué une methode a la function book, car toute function est un type d'objet.
+// call method
+book.call(eurowings, 698, 'Ali Ghali')
+
+console.log(eurowings)
+
+
+book.call(lufthansa,888, "ahlan Sahlan")
+console.log(lufthansa)
+
+// apply method
+
+//                difference between call and apply ? call accepts arguments, while
+//                                           apply  accepts an array of argument
+
+const flightData = [586, 'Georgio Armani']
+book.apply(lufthansa, flightData)
+
+book.apply(eurowings, [874, 'Name plate'])
+
+// the apply method is no longer used because we can use the call method with a ... call is also much faster
+book.call(eurowings, ...flightData)
+
+// #5 Bind method
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+bookEW(784, "Steven Williams")
+
+// we have already set the flightNum as 23 so we only need to add a name
+const bookEW232 = book.bind(eurowings, 232);
+
+bookEW232('Martha Johns');
+bookEW232('William Johston')
