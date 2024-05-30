@@ -237,15 +237,182 @@
 // console.log(addVAT(300))
 
 
-const addTax = (rate,value) => value + value * rate;
+// const addTax = (rate,value) => value + value * rate;
 
-const addVAT = value => addTax(0.23, value)
+// const addVAT = value => addTax(0.23, value)
 
-const addTaxRate = function (rate) {
-    return function (value) {
-        return  value + value * rate;
-    };
-};
+// const addTaxRate = function (rate) {
 
-const addVAT2 = addTaxRate(0.23);
-console.log(addVAT2(235))
+//     return function (value) {
+//         return  value + value * rate;
+//     };
+// };
+
+// const addVAT2 = addTaxRate(0.23);
+// console.log(addVAT2(235))
+
+// 
+// 
+//  coding challenge #1
+// 
+// 
+
+// const pollBtn = document.querySelector('.poll');
+
+// const poll = {
+
+//     question: "What is your favourite programming language?",
+//     options: ['0:JavaScript', '1:Python', '2:Rust', '3: C++'],
+//     answers: new Array(4).fill(0),
+
+//     registerNewAnswer() {
+
+
+//         let answer = Number(prompt(`What is your favourite programming language?
+//         0:JavaScript
+//         1:Python
+//         2:Rust
+//         3: C++
+//         (Write option number)`));
+
+
+//         if (answer < 0 || answer > 3) {
+//             alert(`Wrong answer 
+//             Please type a number between 0 and 3'`)
+//             console.log(answer)
+//         } else if (answer == NaN) {
+//             alert(`Wrong answer 
+//             Please type numbers only between 0 and 3'`)
+//             console.log(answer)
+
+//         }
+//     },
+
+    
+
+//     displayResults(type){
+
+//         if (typeof type === "string")
+
+//     }
+
+// }
+
+// pollBtn.addEventListener('click', poll.registerNewAnswer)
+
+// console.log(poll.answers)
+
+
+
+// 
+// 
+// Teacher's answer
+
+const pollBtn = document.querySelector('.poll');
+const poll = {
+
+    question: "What is your favourite programming language?",
+    options: ['0:JavaScript', '1:Python', '2:Rust', '3: C++'],
+    answers: new Array(4).fill(0),
+    registerNewAnswer() {
+       const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+       console.log(answer)
+        
+        typeof answer === 'number' && answer < this.answers.length
+
+    
+    }
+    
+}
+
+
+pollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll))
+
+// 
+// End of coding challenge
+// 
+// 
+
+
+// function expressions
+
+// const runOnce = function() {
+
+//     console.log('this will never run again')
+// };
+
+
+// runOnce();
+
+// // IIFE : immediately invoked function expression.
+// (function() {
+//     console.log('this also will never run again')
+// })();
+
+
+
+// closures very important to learn
+
+// const secureBooking = function(){
+//     let passengerCount = 0;
+
+//     return function() {
+//         passengerCount++;
+//         console.log(`${passengerCount} passengers`)
+//     }
+// }
+
+// const booker = secureBooking();
+// booker()
+// booker()
+// console.dir(booker)
+
+// example 1
+// let f;
+
+// const g = function() {
+
+//     const a = 23;
+
+//     f= function(){
+//         console.log(a*2);
+//     }
+
+// }
+
+
+// const h = function() {
+//     const b = 777;
+//     f= function () {
+
+        
+//         console.log( b* 2)
+//     };
+    
+// }
+
+
+// g();
+// f();
+// // reassigning F function
+// h();
+// f();
+
+// // example 2
+
+// const boardPassengers = function(n,wait) {
+
+//     // the closure has priority over the scope chain
+//     const perGroup = n / 3;
+
+//     setTimeout(function(){
+// console.log(`We are now boarding all ${n} passengers`)
+// console.log(`there are 3 groups each with ${perGroup} passengers`)
+
+//     },wait * 1000)
+//     console.log(`Will start boarding in ${wait} seconds`)
+// }
+
+// const perGroup = 500;
+
+// boardPassengers(261, 15)
