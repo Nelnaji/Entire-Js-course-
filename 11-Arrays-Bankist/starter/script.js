@@ -108,8 +108,11 @@ currencies.forEach(function(value, key, map){
   console.log(value, key, map)
 })
 
+// the key is exactly the same as a value.
 const currenciesUnique = new Set(['USD', 'EUR', 'GBP', 'EUR', 'USD', 'USD'])
-currenciesUnique.forEach(function(value,key,set){
-console.log(value, key, set)
+
+// in JS _ means a throwaway variable, 
+currenciesUnique.forEach(function(value,_,set){
+console.log(value, set)
 
 })
