@@ -87,13 +87,12 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // // }
 
 // movements.forEach(function(movement, index, array){
-// if (movement > 0)   
+// if (movement > 0)
 //   { console.log(`Movement ${index + 1}: You deposited ${movement}`)
 // } else {
 //   console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`)
 // };
 // });
-
 
 const currencies = new Map([
   ['USD', 'United States dollar'],
@@ -101,18 +100,16 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-console.log(currencies)
+console.log(currencies);
 
-currencies.forEach(function(value, key, map){
-
-  console.log(value, key, map)
-})
+currencies.forEach(function (value, key, map) {
+  console.log(value, key, map);
+});
 
 // the key is exactly the same as a value.
-const currenciesUnique = new Set(['USD', 'EUR', 'GBP', 'EUR', 'USD', 'USD'])
+const currenciesUnique = new Set(['USD', 'EUR', 'GBP', 'EUR', 'USD', 'USD']);
 
-// in JS _ means a throwaway variable, 
-currenciesUnique.forEach(function(value,_,set){
-console.log(value, set)
-
-})
+// in JS _ means a throwaway variable,
+currenciesUnique.forEach(function (value, _, set) {
+  console.log(value, set);
+});
