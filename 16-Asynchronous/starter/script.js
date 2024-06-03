@@ -8,7 +8,7 @@ const countriesContainer = document.querySelector('.countries');
 
 // not using the v3.1 because it's too slow
 // request.open('GET', 'https://restcountries.com/v3.1/name/morocco');
-/*
+
 // function qui affiche le pays
 const renderCountry = function (data, className = '' ) { //important d'ajouter le = '' sinon undefined serra ajouter a la class
 
@@ -30,7 +30,7 @@ countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
 countriesContainer.style.opacity = 1;
 
 }
-
+/*
 
 const getCountryAndNeighbour = function(country) {
   // AjAX call country 1
@@ -84,4 +84,13 @@ getCountryAndNeighbour('morocco');
 
 // new way of making api calls
 
-fetch('https://countries-api-836d.onrender.com/countries/name/morocco')
+const request = fetch('https://countries-api-836d.onrender.com/countries/name/morocco')
+
+// simply used arrow functions
+const getCountryData = function(country) {
+
+  fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`).then(response => response.json()).then( ([data]) =>  renderCountry(data));
+
+};
+
+getCountryData('morocco');
