@@ -3,11 +3,16 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-///////////////////////////////////////
+// error rendering function
 
+const renderError = msg => {
 
-// not using the v3.1 because it's too slow
-// request.open('GET', 'https://restcountries.com/v3.1/name/morocco');
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+  
+  }
+  
+
 
 // function qui affiche le pays
 const renderCountry = function (data, className = '' ) { //important d'ajouter le = '' sinon undefined serra ajouter a la class
@@ -30,6 +35,14 @@ countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
 countriesContainer.style.opacity = 1;
 
 }
+
+
+///////////////////////////////////////
+
+
+// not using the v3.1 because it's too slow
+// request.open('GET', 'https://restcountries.com/v3.1/name/morocco');
+
 /*
 
 const getCountryAndNeighbour = function(country) {
@@ -84,13 +97,38 @@ getCountryAndNeighbour('morocco');
 
 // new way of making api calls
 
-const request = fetch('https://countries-api-836d.onrender.com/countries/name/morocco')
+
 
 // simply used arrow functions
 const getCountryData = function(country) {
 
-  fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`).then(response => response.json()).then( ([data]) =>  renderCountry(data));
+  // country 1
+  fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`).then(
+    
+  response => response.json()
+
+).then(
+    
+  ([data]) =>  {
+    renderCountry(data)
+  const neighbour = data.borders?.[0]
+  // country 2 
+  return fetch(`https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`) 
+  }).then(response => response.json()).then(data => renderCountry(data, "neighbour")).catch( err => console.error(renderError(`Something went wrong 💥💥💥💥 ${err.message} Try again`)) );
+
+
+
+
+
 
 };
 
-getCountryData('morocco');
+
+
+
+btn.addEventListener('click', function(){
+
+  getCountryData('morocco')
+
+})
+
