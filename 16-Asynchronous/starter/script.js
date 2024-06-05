@@ -132,45 +132,45 @@ getCountryAndNeighbour('morocco');
 
 
 
-const getJSON = function (url,errorMsg = 'Something is wrong') {
+// const getJSON = function (url,errorMsg = 'Something is wrong') {
 
 
-  return fetch(url).then(
+//   return fetch(url).then(
     
-  response => {
+//   response => {
 
-    if(!response.ok){
-      throw new Error(`${errorMsg} (${response.status})`)
-    }
+//     if(!response.ok){
+//       throw new Error(`${errorMsg} (${response.status})`)
+//     }
     
-    return response.json()}
+//     return response.json()}
 
-)};
+// )};
 
 
 // simply used arrow functions
-const getCountryData = function(country) {
+// const getCountryData = function(country) {
 
   // country 1
-getJSON(`https://countries-api-836d.onrender.com/countries/name/${country}`, 'Country not found').then( ([data]) =>  {
+// getJSON(`https://countries-api-836d.onrender.com/countries/name/${country}`, 'Country not found').then( ([data]) =>  {
 
-    renderCountry(data)
-  const neighbour = data.borders?.[0]
-  // country 2 
-  return getJSON(`https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`, 'Neighbour not found')
+//     renderCountry(data)
+//   const neighbour = data.borders?.[0]
+//   // country 2 
+//   return getJSON(`https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`, 'Neighbour not found')
     
-}).then(data => renderCountry(data, "neighbour")).catch( err => console.error(renderError(`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
+// }).then(data => renderCountry(data, "neighbour")).catch( err => console.error(renderError(`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
 
-    countriesContainer.style.opacity = 1;
+//     countriesContainer.style.opacity = 1;
 
-  });
-
-
+//   });
 
 
 
 
-};
+
+
+// };
 
 // la method then s'execute quand la promesse est fulfilled, la methode catch s'execute quand la promesse fail. alors que finally s'execute peu importe si la promesse est remplie ou pas
 
@@ -179,37 +179,52 @@ getJSON(`https://countries-api-836d.onrender.com/countries/name/${country}`, 'Co
 § Coordinates 2: 19.037, 72.873
 § Coordinates 3: -33.933, 18.474
 */
-btn.addEventListener('click', function(){
+// btn.addEventListener('click', function(){
 
-  whereAmI(-33.933, 18.474)
+//   whereAmI(-33.933, 18.474)
 
-})
-
-
-const whereAmI = (lat,lng) =>{
+// })
 
 
-  fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
-  ).then(response => {
+// const whereAmI = (lat,lng) =>{
+
+
+//   fetch(
+//     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+//   ).then(response => {
   
   
-    return response.json()
+//     return response.json()
    
-  }).then(data => {
+//   }).then(data => {
 
-    getCountryData(data.countryName)
+//     getCountryData(data.countryName)
      
-  }).catch( err => console.error(renderError((`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
+//   }).catch( err => console.error(renderError((`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
 
-    countriesContainer.style.opacity = 1;
+//     countriesContainer.style.opacity = 1;
 
-  }));
+//   }));
 
-}
+// }
 
 
 
 
 // console.log(`You are in ${data.city}, ${data.countryName}`);
 
+console.log('test start');
+
+setTimeout(() => console.log('o sec timer'),0 );
+
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then( res=> {
+  
+  for ( let i = 0 ; i<1000000000; i++){};
+  console.log(res)
+
+} );
+
+
+console.log('test end');
