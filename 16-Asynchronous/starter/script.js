@@ -213,18 +213,60 @@ getCountryAndNeighbour('morocco');
 
 // console.log(`You are in ${data.city}, ${data.countryName}`);
 
-console.log('test start');
+// console.log('test start');
 
-setTimeout(() => console.log('o sec timer'),0 );
+// setTimeout(() => console.log('o sec timer'),0 );
 
-Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
 
-Promise.resolve('Resolved promise 2').then( res=> {
+// Promise.resolve('Resolved promise 2').then( res=> {
   
-  for ( let i = 0 ; i<1000000000; i++){};
-  console.log(res)
+//   for ( let i = 0 ; i<1000000000; i++){};
+//   console.log(res)
 
-} );
+// } );
 
 
-console.log('test end');
+// console.log('test end');
+/*
+const lotteryPromise = new Promise(function(resolve,reject) {
+
+console.log('lottery draw is happening')
+
+  setTimeout(function(){
+    if(Math.random() >= 0.5)
+      {
+    
+        resolve( 'youwing');
+      } else {
+        reject(new Error('You lose'));
+      }
+    
+  }, 2000)
+})
+
+lotteryPromise.then( res => console.log(res)
+  ).catch(err => console.error(err))
+*/
+// promisifying etTimeout
+  const wait = function (seconds) {
+
+return new Promise ( function (resolve) {
+
+  setTimeout(resolve, seconds * 1000)
+})
+  }
+
+
+  wait(1).then(() =>{ console.log('Ive waited for 1 s')
+
+  return wait(1);
+  }
+
+).then(() => {
+  console.log("I've waited for 2 s")
+  return wait (1);
+}).then(()=> {
+  console.log('waited 3 sec')
+  return wait(1)
+}).then(() => console.log('4s'))
