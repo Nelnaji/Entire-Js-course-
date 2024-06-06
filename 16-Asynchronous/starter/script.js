@@ -96,38 +96,38 @@ getCountryAndNeighbour('morocco');
 
 // new way of making api calls
 
-// const getCountryData = function(country) {
+const getCountryData = function(country) {
 
-//   // country 1
-//   fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`).then(
+  // country 1
+  fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`).then(
     
-//   response => {
+  response => {
 
-//     if(!response.ok){
-//       throw new Error(`Country not found (error: ${response.status})`)
-//     }
+    if(!response.ok){
+      throw new Error(`Country not found (error: ${response.status})`)
+    }
     
-//     return response.json()}
+    return response.json()}
 
-// ).then(
+).then(
     
-//   ([data]) =>  {
-//     renderCountry(data)
-//   const neighbour = data.borders?.[0]
-//   // country 2 
-//   return fetch(`https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`) 
-//   }).then(response => response.json()).then(data => renderCountry(data, "neighbour")).catch( err => console.error(renderError(`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
+  ([data]) =>  {
+    renderCountry(data)
+  const neighbour = data.borders?.[0]
+  // country 2 
+  return fetch(`https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`) 
+  }).then(response => response.json()).then(data => renderCountry(data, "neighbour")).catch( err => console.error(renderError(`Something went wrong 💥💥💥💥 ${err.message} Try again`))).finally(()=>{
 
-//     countriesContainer.style.opacity = 1;
+    countriesContainer.style.opacity = 1;
 
-//   });
-
-
+  });
 
 
 
 
-// };
+
+
+};
 
 
 
@@ -249,6 +249,7 @@ lotteryPromise.then( res => console.log(res)
   ).catch(err => console.error(err))
 */
 // promisifying etTimeout
+/*
   const wait = function (seconds) {
 
 return new Promise ( function (resolve) {
@@ -270,3 +271,68 @@ return new Promise ( function (resolve) {
   console.log('waited 3 sec')
   return wait(1)
 }).then(() => console.log('4s'))
+*/
+
+const getPosition = function () {
+
+return new Promise(function (resolve, reject) {
+
+
+
+  navigator.geolocation.getCurrentPosition(resolve,reject);
+});
+
+};
+
+// getPosition().then( pos => {
+// let  {latitude} = pos.coords;
+// let  {longitude} = pos.coords;
+
+//   console.log(latitude, longitude)
+// })
+
+
+const whereAmI = () =>{
+
+getPosition().then(pos => {
+
+  const {latitude:lat, longitude:lng} = pos.coords;
+
+  return   fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+  );
+})
+
+  .then(response => {
+    
+    
+      return response.json()
+     
+    }).then(data => {
+  
+      getCountryData(data.countryName)
+       
+    }).catch( err => console.error(`Something went wrong 💥💥💥💥 ${err.message} Try again`)).finally(()=>{
+  
+      countriesContainer.style.opacity = 1;
+  
+    });
+  
+  }
+  
+
+  btn.addEventListener('click', whereAmI)
+
+
+  let numbers = [1,3,6,1]
+  let squaredNumbers = []
+
+  function squareSum(numbers)
+  {
+
+console.log(numbers.reduce((a,b) => a+a , 10))
+
+   }
+
+squareSum(numbers)
+  
