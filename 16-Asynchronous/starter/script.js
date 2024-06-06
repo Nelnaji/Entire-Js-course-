@@ -383,7 +383,6 @@ return `I live in ${dataGeo.countryName}`
 //  }
 
 
-*/
 
 
 // always try catch block when dealing with async function
@@ -394,7 +393,9 @@ try{
 // const [data2] = await getJSON(`https://countries-api-836d.onrender.com/countries/name/${c2}`);
 // const [data3] = await getJSON(`https://countries-api-836d.onrender.com/countries/name/${c3}`);
 
-let data = await Promise.all([getJSON(`https://countries-api-836d.onrender.com/countries/name/${c1}`),getJSON(`https://countries-api-836d.onrender.com/countries/name/${c2}`),getJSON(`https://countries-api-836d.onrender.com/countries/name/${c3}`)])
+// this is called a combinator function
+
+let data = await Promise.all([getJSON(`https://countries-api-836d.onrender.com/countries/name/${c1}`),getJSON(`https://countries-api-836d.onrender.com/countries/name/${c2}`),getJSON(`https://countries-api-836d.onrender.com/countries/name/${c3}`)]);
 
 console.log(data.map(d => d[0].capital))
 
@@ -405,3 +406,58 @@ console.log(error.message)
 }}
 
 get3Countries('germany', 'france', 'belgium')
+
+*/
+
+// Promise.race short circuits no matter if fulfilled or rejected.
+// (async function() {
+
+//   const res = await Promise.race([getJSON(`https://countries-api-836d.onrender.com/countries/name/morocco`),getJSON(`https://countries-api-836d.onrender.com/countries/name/mauritania`),getJSON(`https://countries-api-836d.onrender.com/countries/name/france`)]);
+
+
+//   console.log(res[0]);
+// })();
+
+
+
+// Promise.race is very useful to avoid very long requests, so you can force a time limit for fetching the request
+const timeout = function(sec){
+
+  return new Promise( function ( _, reject) {
+    setTimeout( function () {
+      reject( new Error('Request took too long'))}, sec * 1000
+    )  })
+
+  };
+
+
+// very usefull for setting out a timer for requests, so that they don't take forever
+
+Promise.race(
+  [getJSON(`https://countries-api-836d.onrender.com/countries/name/morocco`), timeout(0.2)]
+).then(res => console.log(res[0])).catch(err => console.error(err))
+
+
+// Promise.allSettled is like Promise.all except that it never short circuit.
+
+Promise.allSettled([
+Promise.resolve('succes'),
+Promise.reject('fail'),
+Promise.resolve('succes')
+
+
+]).then(res => console.log(res))
+
+Promise.all([
+  Promise.resolve('succes'),
+  Promise.reject('echec'),
+  Promise.resolve('succes')
+  ]).then(res => console.log(res)).catch(err => console.error(err))
+
+  // Promise.any
+
+  Promise.any([
+    Promise.reject('echec'),
+    Promise.resolve('succes 1'),
+    Promise.resolve('succes 2')
+    ]).then(res => console.log(res))
